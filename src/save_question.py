@@ -20,6 +20,7 @@ def save_question_to_github(question_text):
     try:
         file_content = repo.get_contents(file_path)
         df = pd.read_csv(file_content.download_url)
+        st.write(df)
 
     except:
         # If the file doesn't exist yet, create it
@@ -27,10 +28,12 @@ def save_question_to_github(question_text):
         buffer = df.to_csv(index=False)
         repo.create_file(file_path, "Created questions.csv", buffer)
 
-    buffer = pd.concat(
+    df = pd.concat(
         [df, pd.DataFrame.from_records([{"questions": question_text}])],
         ignore_index=True,
-    ).to_csv(index=False)
+    )
+    st.write(df)
+    buffer = df.to_csv(index=False)
 
     # Commit changes to GitHub
     contents = repo.get_contents(file_path)
