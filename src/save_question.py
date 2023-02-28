@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 from github import Github
-import streamlit as st
 
 
 def save_question_to_github(question_text):
