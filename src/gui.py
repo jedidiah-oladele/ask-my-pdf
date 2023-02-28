@@ -6,7 +6,6 @@ app_name = "Ask my PDF"
 
 import os
 import streamlit as st
-import pandas as pd
 
 st.set_page_config(
     layout="centered",
