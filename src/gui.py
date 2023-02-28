@@ -304,8 +304,8 @@ def b_ask():
 
         q = text.strip()
         a = resp["text"].strip()
-        output_add(q, a)
         save_question.save_question_to_github(q)
+        output_add(q, a)
 
 
 def b_clear():
