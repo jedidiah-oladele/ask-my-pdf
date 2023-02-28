@@ -20,7 +20,6 @@ def save_question_to_github(question_text):
     try:
         file_content = repo.get_contents(file_path)
         df = pd.read_csv(file_content.download_url)
-        st.write(file_content.download_url)
         st.write(df)
 
     except:
@@ -29,6 +28,7 @@ def save_question_to_github(question_text):
         buffer = df.to_csv(index=False)
         repo.create_file(file_path, "Created questions.csv", buffer)
 
+    st.write(df)
     buffer = pd.concat(
         [df, pd.DataFrame.from_records([{"questions": question_text}])],
         ignore_index=True,
