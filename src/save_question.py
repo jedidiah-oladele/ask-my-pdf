@@ -1,13 +1,11 @@
 import os
 import pandas as pd
 from github import Github
-import streamlit as st
 
 
 def save_question_to_github(question_text):
 
     file_path = os.path.join("data", "questions.csv")
-    st.write(file_path)
 
     access_token = os.environ["GITHUB_ACCESS_TOKEN"]
     repo_name = os.environ["GITHUB_REPO_NAME"]
@@ -20,7 +18,6 @@ def save_question_to_github(question_text):
     try:
         file_content = repo.get_contents(file_path)
         df = pd.read_csv(file_content.download_url)
-        st.write(df)
 
     except:
         # If the file doesn't exist yet, create it
