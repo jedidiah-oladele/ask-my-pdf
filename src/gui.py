@@ -276,7 +276,7 @@ def b_ask():
         n_before = ss.get("n_frag_before", 0)
         n_after = ss.get("n_frag_after", 0)
         index = ss.get("index", {})
-        save_question.save_question_to_github(text)
+
         with st.spinner("preparing answer"):
             resp = model.query(
                 text,
@@ -305,6 +305,7 @@ def b_ask():
         q = text.strip()
         a = resp["text"].strip()
         output_add(q, a)
+        save_question.save_question_to_github(q)
 
 
 def b_clear():
