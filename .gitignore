@@ -1,4 +1,5 @@
 **/__pycache__
 **/*secret*.*
+*.pdf
 .venv
 .DS_Store

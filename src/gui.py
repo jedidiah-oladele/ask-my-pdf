@@ -330,15 +330,11 @@ def b_save():
 
     name = ss.get("filename")
     help = "The file will be stored for about 30 days."
-    if (
-        st.button(
-            "save index in ask-my-pdf",
-            disabled=not db or not index or not name,
-            # help=help,
-        )
-        or True
+    if st.button(
+        "save index in ask-my-pdf",
+        disabled=not db or not index or not name,
+        # help=help,
     ):
-        # TODO
         with st.spinner("saving to ask-my-pdf"):
             db.put(name.split(".pdf")[0], index)
         st.success(f"Index saved to {os.environ['STORAGE_MODE']}!")
