@@ -19,12 +19,15 @@ def save_question_to_github(question_text):
         file_content = repo.get_contents(file_path)
         df = pd.read_csv(file_content.download_url)
 
-    except KeyError:
+    except:
         # If the file doesn't exist yet, create it
         df = pd.DataFrame(columns=["questions"])
         buffer = df.to_csv(index=False)
         repo.create_file(file_path, "Created questions.csv", buffer)
 
+    import streamlit as st
+
+    st.write(df)
     buffer = pd.concat(
         [df, pd.DataFrame.from_records([{"questions": question_text}])],
         ignore_index=True,
