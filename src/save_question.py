@@ -12,8 +12,6 @@ def save_question_to_github(question_text):
     repo_name = os.environ["GITHUB_REPO_NAME"]
     owner_name = os.environ["GITHUB_OWNER_NAME"]
 
-    import streamlit as st
-
     # Authenticate with GitHub API
     g = Github(access_token)
     repo = g.get_user(owner_name).get_repo(repo_name)
