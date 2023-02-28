@@ -1,0 +1,11 @@
+openai
+PyPDF2==2.12.1
+scikit-learn
+numpy
+tiktoken
+pycryptodome
+boto3
+redis
+PyGithub
+
+#tomli

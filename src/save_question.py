@@ -1,0 +1,44 @@
+import os
+import pandas as pd
+from github import Github
+
+
+def save_csv_to_github(
+    file_path,
+    df,
+    access_token=os.environ["GITHUB_ACCESS_TOKEN"],
+    repo_name=os.environ["GITHUB_REPO_NAME"],
+    owner_name=os.environ["GITHUB_OWNER_NAME"],
+):
+    # Authenticate with GitHub API
+    g = Github(access_token)
+    repo = g.get_user(owner_name).get_repo(repo_name)
+
+    # Write the modified CSV data to a buffer
+    buffer = df.to_csv(index=False)
+
+    # Commit changes to GitHub
+    try:
+        # Get the existing file contents
+        contents = repo.get_contents(file_path)
+        repo.update_file(contents.path, "Added question", buffer, contents.sha)
+    except:
+        # If the file doesn't exist yet, create it
+        repo.create_file(file_path, "Created Questions csv", buffer)
+
+
+def save_question(question_text):
+    file_path = os.path.join("data", "questions.csv")
+
+    # create an empty dataframe if csv file doesn't exist
+    if not os.path.isfile(file_path):
+        df = pd.DataFrame(columns=["questions"])
+    else:
+        df = pd.read_csv(file_path)
+
+        df = pd.concat(
+            [df, pd.DataFrame.from_records([{"questions": question_text}])],
+            ignore_index=True,
+        )
+
+    save_csv_to_github(file_path, df)
