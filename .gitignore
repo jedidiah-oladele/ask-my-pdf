@@ -1,5 +1,8 @@
+.gitignore
 **/__pycache__
 **/*secret*.*
 *.pdf
 .venv
+**/*DS_Store*.*
 .DS_Store
+FAR 1-50
