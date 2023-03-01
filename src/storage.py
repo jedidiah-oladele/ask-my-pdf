@@ -133,8 +133,9 @@ class GitHubStorage(Storage):
     def _get(self, name):
         path = os.path.join(self.folder, name)
         contents = self.repo.get_contents(path)
-        return base64.b64decode(contents)
-        return contents.decoded_content
+        # return base64.b64decode(contents)
+        # return contents.decoded_content
+        return contents.decoded_content.decode("utf-8")
 
     def _list(self):
         contents = self.repo.get_contents(self.folder)
