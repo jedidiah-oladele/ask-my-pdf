@@ -1,5 +1,4 @@
 import os
-import base64
 import pickle
 import zlib
 from github import Github
@@ -133,8 +132,8 @@ class GitHubStorage(Storage):
     def _get(self, name):
         path = os.path.join(self.folder, name)
         contents = self.repo.get_contents(path)
-        # return base64.b64decode(contents)
         # return contents.decoded_content
+        return contents.raw_data
         return contents.decoded_content.decode("utf-8")
 
     def _list(self):
