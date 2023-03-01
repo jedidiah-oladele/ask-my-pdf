@@ -2,7 +2,6 @@ import os
 import pickle
 import zlib
 from github import Github
-import base64
 
 
 class Storage:
@@ -133,13 +132,13 @@ class GitHubStorage(Storage):
     def _get(self, name):
         path = os.path.join(self.folder, name)
         contents = self.repo.get_contents(path)
-        contents = base64.b64encode(contents)
         return contents.decoded_content
 
     def _list(self):
         contents = self.repo.get_contents(self.folder)
         return [c.name for c in contents]
 
+    # TODO
     def _delete(self, name):
         path = os.path.join(self.folder, name)
         self.repo.delete
