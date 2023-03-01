@@ -2,7 +2,7 @@ import os
 import pickle
 import zlib
 from github import Github
-import streamlit as st
+import base64
 
 
 class Storage:
@@ -133,9 +133,8 @@ class GitHubStorage(Storage):
     def _get(self, name):
         path = os.path.join(self.folder, name)
         contents = self.repo.get_contents(path)
-        # return contents.decoded_content
-        st.session_state["writer"].write(contents.raw_data)
-        return contents.decoded_content.decode("utf-8")
+        contents = base64.b64encode(contents)
+        return contents.decoded_content
 
     def _list(self):
         contents = self.repo.get_contents(self.folder)

@@ -33,7 +33,6 @@ import save_question
 
 # COMPONENTS
 
-ss["writer"] = st.empty()
 
 def ui_spacer(n=2, line=False, next_n=0):
     for _ in range(n):
