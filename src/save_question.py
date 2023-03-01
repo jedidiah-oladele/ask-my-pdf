@@ -60,7 +60,7 @@ def save_csv_to_github(file_path, df):
 
 
 def save_question(question_text):
-    file_path = os.path.join("docs", "questions.csv")
+    file_path = os.path.join("data", "questions.csv")
 
     # create an empty dataframe if csv file doesn't exist
     if not os.path.isfile(file_path):
