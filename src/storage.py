@@ -145,7 +145,9 @@ class GitHubStorage(Storage):
     # TODO
     def _delete(self, name):
         path = os.path.join(self.folder, name)
-        self.repo.delete
+
+        contents = self.repo.get_contents(path)
+        self.repo.delete_file(contents.path, f"deleted {name}", contents.sha)
 
 
 def get_storage(data_dict):
