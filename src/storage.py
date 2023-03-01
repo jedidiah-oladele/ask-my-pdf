@@ -1,5 +1,6 @@
 import os
 import pickle
+import requests
 import zlib
 from github import Github
 
@@ -129,10 +130,14 @@ class GitHubStorage(Storage):
         except Exception:
             self.repo.create_file(path, "Created " + name, data)
 
+    # github doesn't return contents for large files (>1mb). So we use download the raw file ourselves
     def _get(self, name):
         path = os.path.join(self.folder, name)
+
         contents = self.repo.get_contents(path)
-        return contents.decoded_content
+        content = requests.get(contents.download_url).content
+
+        return content
 
     def _list(self):
         contents = self.repo.get_contents(self.folder)
