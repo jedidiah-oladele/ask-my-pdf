@@ -136,7 +136,6 @@ class GitHubStorage(Storage):
 
         contents = self.repo.get_contents(path)
         content = requests.get(contents.download_url).content
-
         return content
 
     def _list(self):
