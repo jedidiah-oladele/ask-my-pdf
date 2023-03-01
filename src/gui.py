@@ -333,7 +333,7 @@ def b_save():
     name = ss.get("filename")
     help = "The file will be stored for about 30 days."
     if st.button(
-        "save index in ask-my-pdf",
+        "save index",
         disabled=not db or not index or not name,
         # help=help,
     ):
@@ -346,7 +346,7 @@ def b_delete():
     db = ss.get("storage")
     name = ss.get("selected_file")
     # TODO: confirm delete
-    if st.button("delete from ask-my-pdf", disabled=not db or not name):
+    if st.button("delete index", disabled=not db or not name):
         with st.spinner("deleting from ask-my-pdf"):
             db.delete(name)
         st.experimental_rerun()
