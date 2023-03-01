@@ -135,7 +135,6 @@ class GitHubStorage(Storage):
         contents = self.repo.get_contents(path)
         # return contents.decoded_content
         st.session_state["writer"].write(contents.raw_data)
-        return contents.raw_data
         return contents.decoded_content.decode("utf-8")
 
     def _list(self):
