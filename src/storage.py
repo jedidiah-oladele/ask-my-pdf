@@ -133,6 +133,7 @@ class GitHubStorage(Storage):
         path = os.path.join(self.folder, name)
         contents = self.repo.get_contents(path)
         # return contents.decoded_content
+        print(contents.raw_data)
         return contents.raw_data
         return contents.decoded_content.decode("utf-8")
 
