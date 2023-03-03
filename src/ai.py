@@ -7,7 +7,6 @@ BUTCHER_EMBEDDINGS = None  # this should be None, as it cuts the embedding vecto
 import tiktoken
 
 encoder = tiktoken.encoding_for_model("text-davinci-003")
-# encoder = tiktoken.encoding_for_model("gpt-3.5-turbo")
 
 
 def get_token_count(text):
@@ -24,16 +23,20 @@ def use_key(api_key):
 
 def complete(prompt, temperature=0.0):
     kwargs = dict(
-        model="text-davinci-003",
-        # model="gpt-3.5-turbo",
-        max_tokens=4000 - get_token_count(prompt),
+        model="gpt-3.5-turbo",
+        max_tokens=4096 - get_token_count(prompt),
         temperature=temperature,
-        prompt=prompt,
         n=1,
     )
-    resp = openai.Completion.create(**kwargs)
+    kwargs["messages"] = [
+        {"role": "system", "content": "output only in raw text"},
+        {"role": "user", "content": prompt},
+    ]
+    kwargs["max_tokens"] -= 30  # UGLY: workaround for not counting chat specific tokens
+    resp = openai.ChatCompletion.create(**kwargs)  # API CALL
+
     out = {}
-    out["text"] = resp["choices"][0]["text"]
+    out["text"] = resp["choices"][0]["message"]["content"]
     out["usage"] = resp["usage"]
     return out
 
