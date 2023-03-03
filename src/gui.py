@@ -359,6 +359,9 @@ def output_add(q, a):
     ss["output"] = new + ss["output"]
 
 
+if "fix_text" not in ss:
+    ss["fix_text"] = True
+
 # LAYOUT
 
 with st.sidebar:

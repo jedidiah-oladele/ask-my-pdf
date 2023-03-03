@@ -24,8 +24,8 @@ def use_key(api_key):
 
 def complete(prompt, temperature=0.0):
     kwargs = dict(
-        # model = 'text-davinci-003',
-        model="gpt-3.5-turbo",
+        model="text-davinci-003",
+        # model="gpt-3.5-turbo",
         max_tokens=4000 - get_token_count(prompt),
         temperature=temperature,
         prompt=prompt,
