@@ -7,8 +7,7 @@ BUTCHER_EMBEDDINGS = None  # this should be None, as it cuts the embedding vecto
 import tiktoken
 
 encoder = tiktoken.encoding_for_model("text-davinci-003")
-#encoder = tiktoken.encoding_for_model("gpt-3.5-turbo")
-#tiktoken.get_encoding()
+# encoder = tiktoken.encoding_for_model("gpt-3.5-turbo")
 
 
 def get_token_count(text):
